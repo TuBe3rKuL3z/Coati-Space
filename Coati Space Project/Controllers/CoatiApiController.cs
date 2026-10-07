@@ -85,9 +85,8 @@ namespace Coati_Space_Project.Controllers
 
             var sb = new StringBuilder();
             sb.AppendLine("==================================================");
-            sb.AppendLine("ОТЧЁТ О ДОБРОВОЛЬНЫХ ПОЖЕРТВОВАНИЯХ (ФОНД ЧИПА)");
+            sb.AppendLine("ОТЧЁТ О ДОБРОВОЛЬНЫХ ПОЖЕРТВОВАНИЯХ");
             sb.AppendLine("==================================================");
-            sb.AppendLine("Статус системы: Демонстрационный режим (Заглушка)");
             sb.AppendLine($"Общая сумма сборов: {total:N0} рублей");
             sb.AppendLine($"Количество взносов: {donations.Count}");
             sb.AppendLine();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,31 +11,31 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold text-success" href="/stav-zoo">🦝 Ставропольский зоопарк</a>
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm mb-4 py-3">
+            <div class="container">
+                <a class="navbar-brand fw-bold text-success fs-5" href="/stav-zoo">Ставропольский зоопарк</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/stav-zoo">Зоопарк</a>
+                            <a class="nav-link text-dark fw-medium px-3" href="/stav-zoo">Зоопарк</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-success fw-semibold" href="/stav-zoo/coati">Носуха Чип</a>
+                            <a class="nav-link text-success fw-semibold px-3" href="/stav-zoo/coati">Носуха Чип</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" href="/stav-zoo/coati#webcam-section">🔴 Веб-камера</a>
+                            <a class="nav-link text-dark fw-medium px-3" href="/stav-zoo/coati#webcam-section">Камера наблюдения</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-warning text-dark" href="/stav-zoo/coati#donation-section">❤️ Донат</a>
+                            <a class="nav-link text-dark fw-medium px-3" href="/stav-zoo/coati#donation-section">Поддержка питомца</a>
                         </li>
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-primary fw-semibold" href="/diary">📖 Дневник наблюдений</a>
+                                <a class="nav-link text-primary fw-semibold px-3" href="/diary">Дневник наблюдений</a>
                             </li>
                         }
                     </ul>
@@ -43,7 +43,7 @@
                         @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item me-2">
-                                <span class="badge bg-light text-dark border p-2">👤 @User.Identity.Name</span>
+                                <span class="badge bg-light text-dark border px-3 py-2">Сотрудник: @User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-danger btn-sm px-3" href="/account/logout">Выйти</a>
@@ -52,7 +52,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="btn btn-outline-secondary btn-sm px-3" href="/account/login">Вход для сотрудников</a>
+                                <a class="btn btn-outline-secondary btn-sm px-3" href="/account/login">Вход для персонала</a>
                             </li>
                         }
                     </ul>
@@ -66,17 +66,15 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted py-3 bg-light mt-auto">
+    <footer class="border-top py-4 bg-white mt-auto">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <div>
-                &copy; 2026 - <strong>Ставропольский зоопарк</strong> • Coati Space Project
+            <div class="text-secondary small">
+                &copy; 2026 Ставропольский зоопарк. Сектор «Южная Америка». Все права защищены.
             </div>
-            <div class="d-flex flex-wrap gap-3 small">
-                <a href="/stav-zoo" class="text-decoration-none text-muted">Главная зоопарка</a>
-                <a href="/stav-zoo/coati" class="text-decoration-none text-muted">Носуха Чип</a>
-                <a href="/api/coati" target="_blank" class="text-decoration-none text-muted">API (Сводка)</a>
-                <a href="/api/coati/diary" target="_blank" class="text-decoration-none text-muted">API (Журнал)</a>
-                <a href="/account/login" class="text-decoration-none text-muted">Служебный вход</a>
+            <div class="d-flex flex-wrap gap-4 small">
+                <a href="/stav-zoo" class="text-decoration-none text-secondary">О зоопарке</a>
+                <a href="/stav-zoo/coati" class="text-decoration-none text-secondary">Носуха Чип</a>
+                <a href="/account/login" class="text-decoration-none text-secondary">Служебный вход</a>
             </div>
         </div>
     </footer>
