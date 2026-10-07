@@ -9,7 +9,7 @@ namespace Coati_Space_Project.Models
         public string Biography { get; set; } = string.Empty;
         public string Diet { get; set; } = string.Empty;
         public string Habitat { get; set; } = string.Empty;
-        public string HealthStatus { get; set; } = "Здоров, активен";
+        public string HealthStatus { get; set; } = "Клинически здоров";
         public string PhotoUrl { get; set; } = "/images/coati-main.jpg";
         public string VideoUrl { get; set; } = "/videos/coati-stream.mp4";
 

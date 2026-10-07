@@ -1,6 +1,9 @@
 @model Coati_Space_Project.Models.CoatiViewModel
 @{
     ViewData["Title"] = "Носуха Чип";
+    string healthStatus = string.IsNullOrWhiteSpace(Model.Coati.HealthStatus) || Model.Coati.HealthStatus.Contains("Отличное")
+        ? "Клинически здоров"
+        : Model.Coati.HealthStatus;
 }
 
 <nav aria-label="breadcrumb" class="mb-3">
@@ -27,7 +30,7 @@
                         <p class="text-secondary fst-italic mb-2">@Model.Coati.Species</p>
                     </div>
                     <span class="badge bg-light text-success border border-success px-3 py-2 fs-6 rounded-pill">
-                        @Model.Coati.HealthStatus
+                        @healthStatus
                     </span>
                 </div>
 
@@ -62,9 +65,6 @@
                     <a href="#gallery-section" class="btn btn-outline-secondary">
                         Фотогалерея
                     </a>
-                    <a href="#video-section" class="btn btn-outline-secondary">
-                        Видео
-                    </a>
                     <a href="#donation-section" class="btn btn-success shadow-sm">
                         Поддержать питомца
                     </a>
@@ -74,19 +74,19 @@
     </div>
 </div>
 
-<!-- Секция «Наблюдение через веб-камеру» (Ровно 1 камера, автовоспроизведение, лаконичная плашка) -->
+<!-- Секция прямой трансляции (Строго одна камера, зацикленное видео, лаконичная плашка) -->
 <div class="card shadow-sm border mb-4 overflow-hidden" id="webcam-section">
     <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
         <h4 class="mb-0 fw-bold text-dark">Прямая трансляция из вольера</h4>
         <span class="text-secondary small">Камера наблюдения</span>
     </div>
     <div class="card-body p-0 bg-black">
-        <div class="live-stream-container position-relative" style="min-height: 420px; max-height: 560px;">
+        <div class="live-stream-container position-relative" style="min-height: 440px; max-height: 600px;">
             <div class="live-indicator">
                 <span class="live-dot"></span>
                 <span>В ЭФИРЕ</span>
             </div>
-            <video id="coatiLiveVideo" class="w-100 h-100 object-fit-cover" autoplay muted loop playsinline controls poster="/images/webcam-placeholder.jpg">
+            <video id="coatiLiveVideo" class="w-100 h-100 object-fit-cover" autoplay muted loop playsinline controls preload="auto" poster="/images/webcam-placeholder.jpg">
                 <source src="/videos/coati-stream.mp4" type="video/mp4" />
                 Ваш браузер не поддерживает видео HTML5.
             </video>
@@ -94,56 +94,26 @@
     </div>
 </div>
 
-<!-- Фотогалерея и видео-блок -->
-<div class="row g-4 mb-4" id="gallery-section">
-    <div class="col-lg-8">
-        <div class="card shadow-sm border h-100 bg-white">
-            <div class="card-header bg-white py-3 border-bottom">
-                <h4 class="mb-0 fw-bold text-dark">Фотогалерея</h4>
-            </div>
-            <div class="card-body">
-                <p class="text-secondary mb-3">Фотографии носухи Чипа в вольере сектора «Южная Америка»:</p>
-                <div class="row g-3">
-                    @for (int i = 0; i < Model.GalleryImages.Count; i++)
-                    {
-                        var imgPath = Model.GalleryImages[i];
-                        <div class="col-md-4 col-sm-6">
-                            <div class="card h-100 border shadow-sm overflow-hidden">
-                                <img src="@imgPath" class="img-fluid rounded-top" alt="Носуха фото @(i + 1)" style="height: 180px; width: 100%; object-fit: cover;" />
-                                <div class="card-body p-2 text-center bg-light">
-                                    <small class="text-secondary">Кадр @(i + 1)</small>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
+<!-- Фотогалерея (Все новые фотографии, чистая аккуратная сетка без технических подписей) -->
+<div class="card shadow-sm border mb-4 bg-white" id="gallery-section">
+    <div class="card-header bg-white py-3 border-bottom">
+        <h4 class="mb-0 fw-bold text-dark">Фотогалерея</h4>
     </div>
-
-    <!-- Видео-блок -->
-    <div class="col-lg-4" id="video-section">
-        <div class="card shadow-sm border h-100 bg-white">
-            <div class="card-header bg-white py-3 border-bottom">
-                <h4 class="mb-0 fw-bold text-dark">Видеозапись</h4>
-            </div>
-            <div class="card-body">
-                <p class="text-secondary small mb-2">Видеоматериал о поведении и активности носухи:</p>
-                <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm mb-3">
-                    <video controls poster="/images/coati-video-poster.jpg" preload="metadata">
-                        <source src="/videos/coati-stream.mp4" type="video/mp4" />
-                        Ваш браузер не поддерживает видео.
-                    </video>
+    <div class="card-body p-4">
+        <div class="row g-3">
+            @foreach (var imgPath in Model.GalleryImages)
+            {
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 border shadow-sm overflow-hidden bg-light">
+                        <img src="@imgPath" class="img-fluid rounded" alt="Фотография носухи Чипа" style="height: 220px; width: 100%; object-fit: cover; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
+                    </div>
                 </div>
-                <div class="p-3 bg-light rounded border small text-secondary mb-0">
-                    Носухи ведут активный дневной образ жизни, проводя большую часть времени в движении и исследовании ярусов вольера.
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
 
-<!-- Дневник наблюдений (публичные заметки) -->
+<!-- Дневник наблюдений (заметки зоологов) -->
 <div class="card shadow-sm border mb-4 bg-white">
     <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
         <h4 class="mb-0 fw-bold text-dark">Заметки зоологов</h4>
@@ -176,7 +146,7 @@
     </div>
 </div>
 
-<!-- Форма пожертвований (Чистый, стандартный процесс) -->
+<!-- Форма пожертвований -->
 <div class="card shadow-sm border mb-4 bg-white" id="donation-section">
     <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center flex-wrap">
         <h4 class="mb-0 fw-bold text-dark">Поддержать носуху Чипа</h4>
@@ -250,15 +220,23 @@
             document.getElementById('donationAmount').value = val;
         }
 
-        // Автоматический старт видео при загрузке страницы
+        // Автоматический старт и непрерывное зацикливание видео
         document.addEventListener('DOMContentLoaded', function () {
             var video = document.getElementById('coatiLiveVideo');
             if (video) {
                 video.muted = true;
+                video.loop = true;
+                video.preload = 'auto';
+
+                video.addEventListener('ended', function () {
+                    video.currentTime = 0;
+                    video.play();
+                });
+
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
                     playPromise.catch(function (error) {
-                        console.log('Автовоспроизведение ожидает взаимодействия пользователя:', error);
+                        console.log('Автовоспроизведение ожидает действия пользователя:', error);
                     });
                 }
             }

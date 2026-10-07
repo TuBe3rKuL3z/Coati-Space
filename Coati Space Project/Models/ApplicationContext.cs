@@ -30,7 +30,7 @@ namespace Coati_Space_Project.Models
                     Biography = "Чип родился в питомнике и поселился в Ставропольском зоопарке весной 2022 года. Он невероятно любознателен, обожает исследовать верхние ярусы вольера своим гибким носом и первым встречает сотрудников зоопарка во время утреннего обхода.",
                     Diet = "Сезонные фрукты (виноград, бананы, груши), перепелиные яйца, зофобас, отварная индейка и цветочный мёд по праздникам.",
                     Habitat = "Просторный вольер сектора млекопитающих «Южная Америка», оборудованный ветками, подвесными гамаками и полосой препятствий для обогащения среды.",
-                    HealthStatus = "Отличное, полон энергии, плановые вакцинации пройдены.",
+                    HealthStatus = "Клинически здоров",
                     PhotoUrl = "/images/coati-main.jpg",
                     VideoUrl = "/videos/coati-stream.mp4"
                 }
@@ -104,11 +104,20 @@ namespace Coati_Space_Project.Models
                 }
             );
 
-            // Тестовые аккаунты сотрудников (роли Employee / Worker)
+            // Тестовые аккаунты сотрудников зоопарка
             modelBuilder.Entity<StaffUser>().HasData(
                 new StaffUser
                 {
                     Id = 1,
+                    Username = "admin",
+                    Password = "admin2026",
+                    FullName = "Иван Романов",
+                    Role = "Admin",
+                    Position = "Руководитель зоологической службы"
+                },
+                new StaffUser
+                {
+                    Id = 2,
                     Username = "keeper",
                     Password = "password123",
                     FullName = "Алексей Смирнов",
@@ -117,12 +126,21 @@ namespace Coati_Space_Project.Models
                 },
                 new StaffUser
                 {
-                    Id = 2,
+                    Id = 3,
                     Username = "vet",
                     Password = "password123",
                     FullName = "Елена Васильева",
                     Role = "Employee",
                     Position = "Главный ветеринарный врач"
+                },
+                new StaffUser
+                {
+                    Id = 4,
+                    Username = "operator",
+                    Password = "operator2026",
+                    FullName = "Дмитрий Ковалев",
+                    Role = "Worker",
+                    Position = "Оператор видеонаблюдения"
                 }
             );
         }

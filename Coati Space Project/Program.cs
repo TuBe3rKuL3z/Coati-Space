@@ -39,6 +39,7 @@ namespace Coati_Space_Project
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthentication();

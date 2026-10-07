@@ -33,7 +33,7 @@ namespace Coati_Space_Project.Controllers
                     Biography = "Чип — всеобщий любимец зоопарка. Активный, любознательный и дружелюбный обитатель вольера.",
                     Diet = "Фрукты, перепелиные яйца, насекомые, нежирное мясо.",
                     Habitat = "Вольер №7, Сектор «Южная Америка».",
-                    HealthStatus = "Отличное, активен",
+                    HealthStatus = "Клинически здоров",
                     PhotoUrl = "/images/coati-main.jpg",
                     VideoUrl = "/videos/coati-stream.mp4"
                 };
@@ -47,15 +47,35 @@ namespace Coati_Space_Project.Controllers
             var totalDonations = await db.Donations.SumAsync(d => (decimal?)d.Amount) ?? 0;
             var donationsCount = await db.Donations.CountAsync();
 
-            var viewModel = new CoatiViewModel
+            var imagesDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            var galleryList = new List<string>();
+            if (Directory.Exists(imagesDir))
             {
-                Coati = coati,
-                GalleryImages = new List<string>
+                galleryList = Directory.GetFiles(imagesDir, "coati-gallery-*.jpg")
+                    .OrderBy(f => f)
+                    .Select(f => "/images/" + Path.GetFileName(f))
+                    .ToList();
+            }
+
+            if (!galleryList.Any())
+            {
+                galleryList = new List<string>
                 {
                     "/images/coati-gallery-1.jpg",
                     "/images/coati-gallery-2.jpg",
-                    "/images/coati-gallery-3.jpg"
-                },
+                    "/images/coati-gallery-3.jpg",
+                    "/images/coati-gallery-4.jpg",
+                    "/images/coati-gallery-5.jpg",
+                    "/images/coati-gallery-6.jpg",
+                    "/images/coati-gallery-7.jpg",
+                    "/images/coati-gallery-8.jpg"
+                };
+            }
+
+            var viewModel = new CoatiViewModel
+            {
+                Coati = coati,
+                GalleryImages = galleryList,
                 RecentDiaryEntries = recentEntries,
                 TotalDonations = totalDonations,
                 DonationsCount = donationsCount
