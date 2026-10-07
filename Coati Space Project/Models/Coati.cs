@@ -15,7 +15,7 @@ namespace Coati_Space_Project.Models
 
         public Coati()
         {
-            Name = "Чип";
+            Name = "Хахатуха";
         }
 
         public Coati(int id, string name, string species, string gender, DateOnly birthDate,

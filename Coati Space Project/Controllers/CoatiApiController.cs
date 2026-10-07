@@ -28,7 +28,7 @@ namespace Coati_Space_Project.Controllers
 
             var sb = new StringBuilder();
             sb.AppendLine("==================================================");
-            sb.AppendLine("ИНФОРМАЦИОННАЯ СВОДКА ЗООПАРКА: НОСУХА ЧИП");
+            sb.AppendLine("ИНФОРМАЦИОННАЯ СВОДКА ЗООПАРКА: НОСУХА ХАХАТУХА");
             sb.AppendLine("==================================================");
             sb.AppendLine($"Кличка:             {coati.Name}");
             sb.AppendLine($"Биологический вид:  {coati.Species}");
@@ -57,7 +57,7 @@ namespace Coati_Space_Project.Controllers
 
             var sb = new StringBuilder();
             sb.AppendLine("==================================================");
-            sb.AppendLine("ЖУРНАЛ НАБЛЮДЕНИЙ ЗООЛОГОВ И КИПЕРОВ (НОСУХА ЧИП)");
+            sb.AppendLine("ЖУРНАЛ НАБЛЮДЕНИЙ ЗООЛОГОВ И КИПЕРОВ (НОСУХА Хахатуха)");
             sb.AppendLine("==================================================");
             sb.AppendLine($"Всего записей в журнале: {entries.Count}");
             sb.AppendLine();
