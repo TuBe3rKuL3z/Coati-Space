@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Coati_Space_Project.Models;
+
 namespace Coati_Space_Project
 {
     public class Program
@@ -5,6 +8,9 @@ namespace Coati_Space_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(connection));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
