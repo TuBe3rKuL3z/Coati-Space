@@ -201,8 +201,14 @@
         </div>
     </div>
     <div class="card-body p-4">
+        <div class="alert alert-info border-info d-flex align-items-center mb-3 py-2">
+            <div>
+                ℹ️ <strong>Информационная заглушка:</strong> Модуль приёма платежей работает в демонстрационном режиме. Реальные банковские транзакции временно отключены, данные фиксируются в тестовой базе зоопарка.
+            </div>
+        </div>
+
         <p class="text-muted">
-            Вы можете сделать добровольный взнос любой суммы. Все средства направляются на свежие фрукты, витаминные добавки, игрушки и обустройство комфортного вольера для Чипа.
+            Вы можете сделать символический добровольный взнос. Все средства виртуально направляются на свежие фрукты, витаминные добавки, игрушки и обустройство комфортного вольера для Чипа.
         </p>
 
         @if (TempData["DonationSuccess"] != null)
@@ -257,6 +263,15 @@
                 🎁 Отправить донат для Чипа
             </button>
         </form>
+
+        <div class="mt-4 pt-3 border-top d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <span class="text-muted small">Эндпоинты данных на русском языке:</span>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="/api/coati" target="_blank" class="btn btn-outline-secondary btn-sm">📄 Текстовая сводка (/api/coati)</a>
+                <a href="/api/coati/diary" target="_blank" class="btn btn-outline-secondary btn-sm">📋 Журнал событий (/api/coati/diary)</a>
+                <a href="/api/coati/donations" target="_blank" class="btn btn-outline-secondary btn-sm">💰 Отчёт по сборам (/api/coati/donations)</a>
+            </div>
+        </div>
     </div>
 </div>
 

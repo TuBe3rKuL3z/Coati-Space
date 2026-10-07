@@ -85,7 +85,7 @@ namespace Coati_Space_Project.Controllers
             db.Donations.Add(donation);
             await db.SaveChangesAsync();
 
-            TempData["DonationSuccess"] = $"Спасибо, {donation.DonorName}! Ваш взнос {donation.Amount:N0} ₽ успешно принят. Носуха Чип машет вам пушистым хвостом!";
+            TempData["DonationSuccess"] = $"[РЕЖИМ ЗАГЛУШКИ] Спасибо, {donation.DonorName}! Форма работает в демонстрационном режиме. Ваш виртуальный взнос {donation.Amount:N0} ₽ («{donation.Target}») успешно принят. Чип шлет вам благодарность!";
             return Redirect("/stav-zoo/coati#donation-section");
         }
     }
