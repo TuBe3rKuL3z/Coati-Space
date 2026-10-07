@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Авторизация сотрудников — Зоопарк";
+}
+
+<div class="row justify-content-center my-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0 rounded-3">
+            <div class="card-header bg-dark text-white text-center py-4">
+                <h4 class="mb-1 fw-bold">🔐 Доступ для персонала</h4>
+                <p class="small text-white-50 mb-0">Служебный вход в дневник наблюдений за носухой</p>
+            </div>
+            <div class="card-body p-4">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Ошибка!</strong> @ViewBag.Error
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+
+                <form method="post" asp-controller="Account" asp-action="Login">
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Логин сотрудника:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">👤</span>
+                            <input type="text" id="usernameInput" name="username" class="form-control" placeholder="keeper или vet" required />
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Пароль:</label>
+                        <div class="input-group">
+                            <span class="input-group-text">🔑</span>
+                            <input type="password" id="passwordInput" name="password" class="form-control" placeholder="••••••••" required />
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 py-2 fw-bold shadow-sm">
+                        Войти в систему
+                    </button>
+                </form>
+
+                <div class="mt-4 p-3 bg-light rounded border">
+                    <small class="text-muted fw-bold d-block mb-2">💡 Данные для проверки и демонстрации:</small>
+                    <div class="d-flex flex-column gap-1 small">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Кипер: <code>keeper</code> / <code>password123</code></span>
+                            <button type="button" class="btn btn-sm btn-outline-secondary py-0" onclick="fillCreds('keeper', 'password123')">Подставить</button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Ветврач: <code>vet</code> / <code>password123</code></span>
+                            <button type="button" class="btn btn-sm btn-outline-secondary py-0" onclick="fillCreds('vet', 'password123')">Подставить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a href="/stav-zoo/coati" class="text-decoration-none small text-secondary">
+                        ← Вернуться на страницу носухи
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function fillCreds(u, p) {
+            document.getElementById('usernameInput').value = u;
+            document.getElementById('passwordInput').value = p;
+        }
+    </script>
+}
