@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Coati_Space_Project</title>
+    <title>@ViewData["Title"] - Ставропольский зоопарк</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -66,9 +66,18 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Coati_Space_Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted py-3 bg-light mt-auto">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <div>
+                &copy; 2026 - <strong>Ставропольский зоопарк</strong> • Coati Space Project
+            </div>
+            <div class="d-flex flex-wrap gap-3 small">
+                <a href="/stav-zoo" class="text-decoration-none text-muted">Главная зоопарка</a>
+                <a href="/stav-zoo/coati" class="text-decoration-none text-muted">Носуха Чип</a>
+                <a href="/api/coati" target="_blank" class="text-decoration-none text-muted">API (Сводка)</a>
+                <a href="/api/coati/diary" target="_blank" class="text-decoration-none text-muted">API (Журнал)</a>
+                <a href="/account/login" class="text-decoration-none text-muted">Служебный вход</a>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
