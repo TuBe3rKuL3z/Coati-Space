@@ -1,0 +1,278 @@
+@model Coati_Space_Project.Models.CoatiViewModel
+@{
+    ViewData["Title"] = "Носуха Чип — Ставропольский зоопарк";
+}
+
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Zoo" asp-action="Index">Ставропольский зоопарк</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Носуха (@Model.Coati.Name)</li>
+    </ol>
+</nav>
+
+<!-- Главная карточка особи носухи -->
+<div class="card shadow-sm border-0 mb-4 overflow-hidden">
+    <div class="row g-0">
+        <div class="col-lg-5 position-relative">
+            <img src="@Model.Coati.PhotoUrl" class="img-fluid h-100 w-100 object-fit-cover rounded-start" alt="@Model.Coati.Name" style="min-height: 380px;" />
+            <span class="position-absolute top-0 start-0 m-3 badge bg-success fs-6 shadow-sm">
+                Обитатель зоопарка
+            </span>
+        </div>
+        <div class="col-lg-7">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                    <div>
+                        <h1 class="card-title display-6 fw-bold text-success mb-1">@Model.Coati.Name</h1>
+                        <p class="text-muted fst-italic mb-2">@Model.Coati.Species</p>
+                    </div>
+                    <span class="badge bg-success-subtle text-success border border-success px-3 py-2 fs-6 rounded-pill">
+                        ● @Model.Coati.HealthStatus
+                    </span>
+                </div>
+
+                <hr class="my-3" />
+
+                <div class="row g-2 mb-3">
+                    <div class="col-sm-6">
+                        <strong>Пол:</strong> <span class="text-secondary">@Model.Coati.Gender</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong>Дата рождения:</strong> <span class="text-secondary">@Model.Coati.BirthDate.ToString("dd.MM.yyyy")</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong>Сектор:</strong> <span class="text-secondary">@Model.Coati.Habitat</span>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong>Рацион:</strong> <span class="text-secondary">@Model.Coati.Diet</span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="fw-semibold text-dark">История и характер:</h5>
+                    <p class="text-secondary leading-relaxed mb-0">
+                        @Model.Coati.Biography
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 pt-2">
+                    <a href="#webcam-section" class="btn btn-danger shadow-sm">
+                        🔴 Онлайн-камера
+                    </a>
+                    <a href="#gallery-section" class="btn btn-outline-success">
+                        📷 Галерея
+                    </a>
+                    <a href="#video-section" class="btn btn-outline-primary">
+                        🎬 Видео
+                    </a>
+                    <a href="#donation-section" class="btn btn-warning shadow-sm">
+                        ❤️ Поддержать Чипа
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Секция «Наблюдение через веб-камеру» -->
+<div class="card shadow-sm border-0 mb-4" id="webcam-section">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-danger rounded-pill px-3 py-2 animate-pulse">🔴 LIVE / ПРЯМОЙ ЭФИР</span>
+            <h5 class="mb-0 fw-bold">Онлайн-наблюдение за вольером носухи</h5>
+        </div>
+        <div class="text-white-50 small d-none d-md-block">
+            Камера #1 (Тропический ярус) • Качество: 1080p
+        </div>
+    </div>
+    <div class="card-body p-3 bg-black">
+        <div class="position-relative overflow-hidden rounded text-center bg-dark" style="min-height: 420px; max-height: 540px;">
+            <video id="coatiLiveVideo" class="w-100 h-100 object-fit-cover rounded" controls poster="/images/webcam-placeholder.jpg" loop playsinline>
+                <source src="/videos/coati-stream.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео HTML5.
+            </video>
+        </div>
+        <div class="d-flex flex-wrap justify-content-between align-items-center text-light mt-3 px-2">
+            <div class="d-flex gap-2 mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-outline-light active" onclick="switchCam('Камера 1 (Основной вольер)')">
+                    📹 Камера 1: Вольер
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-light" onclick="switchCam('Камера 2 (Домик и гамак)')">
+                    📹 Камера 2: Домик
+                </button>
+            </div>
+            <div class="small text-secondary" id="camStatusText">
+                🟢 Сигнал стабильный • Задержка 0.4 сек • Температура в павильоне +24°C
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Фотогалерея и видео-блок -->
+<div class="row g-4 mb-4" id="gallery-section">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3 border-bottom">
+                <h4 class="mb-0 fw-bold text-success">📷 Фотогалерея: Чип в объективе</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Фотохроника жизни и забавных моментов нашей носухи в вольере:</p>
+                <div class="row g-3">
+                    @for (int i = 0; i < Model.GalleryImages.Count; i++)
+                    {
+                        var imgPath = Model.GalleryImages[i];
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card h-100 border-0 shadow-sm overflow-hidden">
+                                <img src="@imgPath" class="img-fluid rounded gallery-thumbnail" alt="Носуха фото @(i + 1)" style="height: 180px; width: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+                                <div class="card-body p-2 text-center">
+                                    <small class="text-muted">Кадр #@(i + 1) — Вольер</small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Видео-блок -->
+    <div class="col-lg-4" id="video-section">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3 border-bottom">
+                <h4 class="mb-0 fw-bold text-primary">🎬 Видео-хроника</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small">Короткий ролик об активных играх и привычках Чипа:</p>
+                <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm mb-3">
+                    <video controls poster="/images/coati-video-poster.jpg" preload="metadata">
+                        <source src="/videos/coati-stream.mp4" type="video/mp4" />
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+                <div class="alert alert-light border small text-muted mb-0">
+                    💡 Носухи ведут дневной образ жизни, поэтому в светлое время суток вы всегда можете застать Чипа в движении.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Дневник наблюдений (публичные свежие записи) -->
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+        <h4 class="mb-0 fw-bold text-dark">📋 Заметки зоологов о Чипе</h4>
+        <span class="badge bg-secondary">Публичные записи киперов</span>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            @if (Model.RecentDiaryEntries.Any())
+            {
+                @foreach (var entry in Model.RecentDiaryEntries)
+                {
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100 bg-light">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="badge bg-success">@entry.EventType</span>
+                                <small class="text-muted">@entry.EventDate.ToString("dd.MM.yyyy HH:mm")</small>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-dark">@entry.Title</h6>
+                            <p class="small text-secondary mb-2">@entry.Description</p>
+                            <small class="text-muted fst-italic">Зафиксировал: @entry.Author</small>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-muted">Записей пока нет.</div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Форма пожертвований (Free donation) -->
+<div class="card shadow-sm border-0 mb-4 border-warning" id="donation-section">
+    <div class="card-header bg-warning bg-opacity-25 py-3 border-bottom border-warning">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <h4 class="mb-0 fw-bold text-dark">🥕 Поддержать носуху Чипа (Донат на корм и уход)</h4>
+            <span class="badge bg-warning text-dark px-3 py-2 fs-6">
+                Собрано: @Model.TotalDonations.ToString("N0") ₽ (@Model.DonationsCount взносов)
+            </span>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <p class="text-muted">
+            Вы можете сделать добровольный взнос любой суммы. Все средства направляются на свежие фрукты, витаминные добавки, игрушки и обустройство комфортного вольера для Чипа.
+        </p>
+
+        @if (TempData["DonationSuccess"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Спасибо!</strong> @TempData["DonationSuccess"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form asp-controller="Zoo" asp-action="Donate" method="post" class="needs-validation">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Выберите или введите сумму (руб.):</label>
+                <div class="btn-group w-100 mb-2" role="group">
+                    <button type="button" class="btn btn-outline-warning text-dark" onclick="setAmount(100)">100 ₽</button>
+                    <button type="button" class="btn btn-outline-warning text-dark" onclick="setAmount(300)">300 ₽</button>
+                    <button type="button" class="btn btn-outline-warning text-dark" onclick="setAmount(500)">500 ₽</button>
+                    <button type="button" class="btn btn-outline-warning text-dark" onclick="setAmount(1000)">1 000 ₽</button>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">₽</span>
+                    <input type="number" id="donationAmount" name="amount" class="form-control form-control-lg" min="10" max="100000" value="300" required />
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Ваше имя или никнейм:</label>
+                    <input type="text" name="donorName" class="form-control" placeholder="Например: Иван или Друг Чипа" value="Друг зоопарка" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Электронная почта (необязательно):</label>
+                    <input type="email" name="email" class="form-control" placeholder="user@example.com" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Цель пожертвования:</label>
+                <select name="target" class="form-select">
+                    <option value="На свежие фрукты и лакомства">На свежие фрукты и лакомства (виноград, бананы)</option>
+                    <option value="На витамины и уход">На витамины и ветеринарный уход</option>
+                    <option value="На игрушки и обогащение вольера">На новые канаты, головоломки и игрушки</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Тёплые пожелания носухе:</label>
+                <textarea name="message" class="form-control" rows="2" placeholder="Напишите пару добрых слов Чипу..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold shadow-sm">
+                🎁 Отправить донат для Чипа
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function setAmount(val) {
+            document.getElementById('donationAmount').value = val;
+        }
+
+        function switchCam(name) {
+            document.getElementById('camStatusText').innerText = '🟢 Переключено на: ' + name + ' • Задержка 0.4 сек';
+            var video = document.getElementById('coatiLiveVideo');
+            if (video) {
+                video.currentTime = 0;
+                video.play();
+            }
+        }
+    </script>
+}

@@ -31,9 +31,22 @@ namespace Coati_Space_Project
             app.UseAuthorization();
 
             app.MapStaticAssets();
+
+            app.MapControllerRoute(
+                name: "zoo_coati",
+                pattern: "stav-zoo/coati",
+                defaults: new { controller = "Zoo", action = "Coati" })
+                .WithStaticAssets();
+
+            app.MapControllerRoute(
+                name: "zoo_main",
+                pattern: "stav-zoo",
+                defaults: new { controller = "Zoo", action = "Index" })
+                .WithStaticAssets();
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Zoo}/{action=Coati}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

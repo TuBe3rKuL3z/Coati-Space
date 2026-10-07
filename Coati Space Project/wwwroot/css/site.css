@@ -1,5 +1,16 @@
 html {
   font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+@keyframes livePulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.animate-pulse {
+  animation: livePulse 2s infinite ease-in-out;
 }
 
 @media (min-width: 768px) {

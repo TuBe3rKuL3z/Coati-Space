@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Coati_Space_Project</a>
+                <a class="navbar-brand fw-bold text-success" href="/stav-zoo">🦝 Ставропольский зоопарк</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,10 +21,21 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" href="/stav-zoo">Зоопарк</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-success fw-semibold" href="/stav-zoo/coati">Носуха Чип</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="/stav-zoo/coati#webcam-section">🔴 Веб-камера</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-warning text-dark" href="/stav-zoo/coati#donation-section">❤️ Донат</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-secondary btn-sm px-3 ms-2" href="/account/login">Вход для сотрудников</a>
                         </li>
                     </ul>
                 </div>
